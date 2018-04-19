@@ -1,5 +1,7 @@
 import pykd
 
+# Parsing the ProcessList with minimal pykd and lot's of debug output. 
+
 # 
 def firstNumberInString(string):
 	# meant to get the middle number out of Windbgs: "Evaluate expression: 1104 = 00000000`00000450"

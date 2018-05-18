@@ -1,23 +1,4 @@
-import pykd
-
-
-if __name__ == "__main__":
-
-	if not pykd.isWindbgExt():
-		print("Script is launch out of WinDBG")
-		quit(0)
-
-	pActiveProcessHead = pykd.getOffset("nt!PsActiveProcessHead")
-	# or like this:
-	#pActiveProcessList = pykd.module("nt").PsActiveProcessHead
-	
-	dprintln("PsActiveProcessHead is @ 0x%08x"%pActiveProcessHead)
-	
-	# the boring way would start like this:
-	# processList = pykd.typedVarList(pActiveProcessList, "nt!_EPROCESS", "ActiveProcessLinks" )
-	
 	process_list_head = pykd.typedVar("_TABLE_ENTRY", pActiveProcessList)
-
 	ep_link_offset = pykd.dbgCommand("@@(#FIELD_OFFSET(nt!_EPROCESS,ActiveProcessLinks))")
 	
 	flink = process_list_head.InLoadOrderLinks.Flink

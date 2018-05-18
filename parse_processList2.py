@@ -8,8 +8,8 @@ if __name__ == "__main__":
 		print("Script cannot be launched outside Windbg")
 		quit(0)
 
-	pActiveProcessList = pykd.getOffset("nt!PsActiveProcessHead")
-	#pActiveProcessList = pykd.module("nt").PsActiveProcessHead
+	pActiveProcessList = pykd.module("nt").PsActiveProcessHead
+	# pActiveProcessList = pykd.getOffset("nt!PsActiveProcessHead") -> slower than using module("nt")...
 	processList = pykd.typedVarList(pActiveProcessList, "nt!_EPROCESS", "ActiveProcessLinks" )
 
 	for i, process in enumerate(processList):
